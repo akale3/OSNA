@@ -1,0 +1,101 @@
+Enter your responses inline below and push this file to your private GitHub
+repository.
+
+
+1. Assume I plan to use the friend_overlap function above to quantify the
+similarity of two users. E.g., because 344 is larger than 1, I conclude that
+Jill Stein and Gary Johnson are more similar than Hillary Clinton and Donald
+Trump.
+
+How is this approach misleading? How might you fix it?
+
+Answer:
+    1. The number of set of users followed by Jill Stein and Gary Johnson are much bigger than the user set count followed by Hillary Clinton
+       and Donald Trump. So directly comparing the number of common users for their similarity is completely invalid.
+    2. If we compare the common number of users they follow Jill and Gary have 344 users common as compare to Hillary and Donald which
+       have just 1 user in common. But from these values we can not say that the Jill and Gary are more similar than Hillary and Donald.
+    3. As we don't know the types of person they follow, and the number of people of particular field they are following we can not
+       predict their similarity.
+    4. Lets take an example:
+        If two user A nd B follow 100 users from same Domain, however user C and D follow 10 specific person from 10 specific fields in common.
+        So considering this example we can not say that person A and B are more similar than person C and D. Because they have just
+        one field similar. However person C and D have more similarity. So these numbers can be misleading.
+    5. The approach to fix this problem is we will find the sets of type of users the given users follow. Analyse the data, consider the similarity
+       between these users and then conclude regarding the users similarity.
+    6. Instead of comparing the common user count we can check the similarity using some similarity formulae such as Jaccard Similarity. which will be
+       more accurate for comparing similarities between two users.
+
+
+
+2. Looking at the output of your followed_by_hillary_and_donald function, why
+do you think this user is followed by both Hilary Clinton and Donald Trump,
+who are rivals? Do some web searches to see if you can find out more
+information.
+
+Answer:
+    1. The common user followed by Hillary and Donald is Magic Johnson. Magic Johnson is an retired American Basketball player and a well known Business man.
+       As a basketball player anyone can follow him.
+    2. Magic Johnson supports Hillary Clinton as a political leader. That might be one of the reason why Hillary follows Magic Johnson.
+    3. However Magic Johnson is also a business man, Donal trump too has business career. That might be one of the reason why Donald trump follows Magic Johnson.
+
+
+3. There is a big difference in how many accounts each candidate follows (Gary
+Johnson follows over 3K accounts, while Donald Trump follows less than
+50). Why do you think this is? How might that affect our analysis?
+
+Answer:
+    1. Donald trump has 11.4 Million followers however Gary Johnson has only 315.00 Thousand followers.
+    2. To convey any message (Tweet) to people Donald trump do not need friends so that he deliver his message to large number of public.
+       However Gary Johnson will have to add more friends to pass a single message to many people. Thus if Gary Johnson add more friends or follows more people,
+       his message will be delivered to max number of users. Then when they re-tweet there followers will get to know.
+       And because of this Gary Johnson needs to follow more friend than Donald Trump.
+    3. As the data set is completely different in size we can not analyse the data properly. We can not predict the similarity between
+       two users based on this data set as there is a large difference in number of users followed by both users.
+
+
+4. The follower graph we've collected is incomplete. To expand it, we would
+have to also collect the list of accounts followed by each of the
+friends. That is, for each user X that Donald Trump follows, we would have to
+also collect all the users that X follows. Assuming we again use the API call
+https://dev.twitter.com/rest/reference/get/friends/ids, how many requests will
+we have to make? Given how Twitter does rate limiting
+(https://dev.twitter.com/rest/public/rate-limiting), approximately how many
+minutes will it take to collect this data?
+
+Answer: Considering our given code to collect data for all given candidates:
+    Donald Trump
+    1. Total request for Donald trump is 42 req for his friends and 1 req for himself
+       Total request = 1 + 42 = 43.
+       For first call we dont have to wait, so waiting time is zero for 15 requests.
+       For next 2 calls 15 req per call(30 requests), so waiting time will be 15 minutes each call.
+       Total Time taken for 43 requests = 30 minutes.
+
+    Hillary Clinton
+    2. Total request for Hillary Clinton is 748 req for her friends and 1 req for herself
+       Total request = 1 + 748 = 749.
+       For next 50 calls 15 req per call(749 requests), so waiting time will be 15 minutes each call.
+       Total Time taken for 749 requests = 750 minutes.
+
+    Gary Johnson
+    3. Total request for Gary Johnson is 3124 req for his friends and 1 req for himself
+       Total request for Gary Johnson is 3124 req for his friends and 1 req for himself
+       Total request = 1 + 3124 = 3125.
+       For next 209 calls 15 req per call(3125 requests), so waiting time will be 15 minutes each call.
+       Total Time taken for 3125 requests = 3135 minutes.
+
+    Jill Stein
+    4. Total request for Jill Stein is 4159 req for his friends and 1 req for himself
+       Total request for Jill Stein is 4159 req for his friends and 1 req for himself
+       Total request = 1 + 4159 = 4160.
+       For first call we dont have to wait, so waiting time is zero for 15 requests.
+       For next 278 calls 15 req per call(4160 requests), so waiting time will be 15 minutes each call.
+       Total Time taken for 4160 requests = 4170 minutes.
+
+    So the total number of API calls (request) to collect this data = 43 + 749 + 3125 + 4160
+                                                        = 8077 Requests.
+
+    So the total time to collect this data = 30 + 750 + 3135 + 4170
+                                           = 8085 minutes.
+
+    To minimize time further what we can do is we can add all the user's id in a set, so all the common users request time will be
+    cut down.

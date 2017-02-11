@@ -1,0 +1,47 @@
+Project - Sentiment Analysis.
+
+The main purpose of this project is to perform the sentiment analysis on any keyword and tell people sentiments on a particular thing. Here I have collected 2000 tweets 
+on iPhone using twitter API and stored them. I have used tweepy streaming API to collect these tweets. Streaming API gives the recent tweets.
+
+Also I have extracted 150 users from these tweets and fetched their friends and stored them into a separate file. I have used TwitterAPI to collect the user's friends.
+
+Users's data is used to perform the clustering and find different number of communities based on their common friends.
+I have used Jaccard similarity to find the similarity between users. This value is computed by considering the number of common friends 
+between these two users.
+Based on the similarity value the algorithm defines whether to add a link between respective users.
+
+Sentiment analysis is performed on tweets. This process classify all the extracted tweets in 3 classes as positive, negative and neutral.
+
+Code functionality: 
+
+collect.py
+    - This script will first collect the specified number of tweets (default 200) based on the given #hashTag keyword (iPhone). 
+    - All these tweets will be stored in data folder in iPhone.txt file. 
+    - After collecting specified number of tweets it will fetch all the users from these tweets.
+    - After fetching users it will start collecting user's friends and will store them in iphoneUsersFriends.txt file.
+    - In this only english language tweets are fetched.
+    - All retweets are ignored so that our analysis will not be on affected because of all these retweets.
+    
+cluster.py
+    - This script reads iphoneUsersFriends.txt file and construct a graph based on the jaccard similarity between users.
+    - All the outliers are removed from the graph so that it will give proper connected components with some specific degree.
+    - Then that graph is passed to girvan-newman method which cluseterize it into different communities.
+    - There results are stored in cluster.txt
+
+classify.py
+    - In this script I have used affin library to get all the positive and negative words. Based on these words its providing input for recognizing positive 
+      and negative sentiments.       
+    - Also Training data is downloaded on the fly from http://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip url. It has 500+ pre labeled tweets which is useful to train
+      logistic regression classifer.
+    - This model is fit against training data and then applied on collected tweets and results are stored in classify.txt.
+    - While processing I need to refactored tweets data. I have removed all the https link and removed all the hashtags and @username from tweet. 
+      Removing these links and hashtags helps to classiy data more accurately.
+Resluts Found : 515 records were classified
+                                                        positive classified         negative classified         neutral classified
+                               Before removing links:          73                           404                         38
+                                After removing links:          73                           378                         64(Improved)
+    After removing @ froom users and # from hashtags:          186(Improved)                175                         154
+
+summarize.py
+    - This script just read two files 'cluster.txt' and 'classify.txt' and put there result in 'summary.txt'.
+    - summary.txt has all the results of nodes clustering and tweets classification.

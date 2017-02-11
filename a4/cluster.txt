@@ -1,0 +1,6 @@
+Cluster Results: 
+ 
+Number of users collected: 50
+Number of communities discovered: 4
+Average number of users per community: 3.0
+ 

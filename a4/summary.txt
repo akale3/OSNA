@@ -1,0 +1,17 @@
+Cluster Results: 
+ 
+Number of users collected: 50
+Number of communities discovered: 4
+Average number of users per community: 3.0
+ 
+Classify Results: 
+ 
+Total number of tweets processed: 200
+Number of positive tweets classified : 69
+Positive tweet sample : Loving my new iPhone 7 Plus Glad I listened to my big brother
+ 
+Number of negative tweets classified : 89
+Negative tweet sample : Haven t done an update on my iPhone 7 since I got it did one yesterday My phone battery is so much worse it s unbelievable I am so mad
+ 
+Number of neutral tweets classified : 42
+Neutral tweet sample : At least you ve got an iPhone 7 I m still using an LG Hmmm
